@@ -4,6 +4,15 @@
 
 * { margin: 0; padding: 0; }
 *, *::before, *::after { box-sizing: border-box;}
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+#__next {
+  width: 100%;
+  overflow-x: hidden;
+}
 
 body { min-height: 100dvh;}
 input, button, textarea, select { font: inherit; }
@@ -21,4 +30,21 @@ img, video, svg { height: auto; max-width: 100%; }
     scroll-behavior: auto !important;
     transition: none;
   }
+}
+
+footer {
+  background-color: #5c5c5c;
+  border-top: none;
+  margin-top: -1px; /* Ajusta el valor según sea necesario */
+}
+
+header {
+  background-color: #5c5c5c;
+}
+.nav-links {
+  background-color: #5c5c5c;
+}
+
+.logo-footer {
+  height: 30rem; /* Altura deseada para el logotipo */
 }

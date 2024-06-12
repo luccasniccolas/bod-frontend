@@ -1,7 +1,8 @@
-"use client"
+"use client";
 import React, { useEffect, useRef } from 'react';
-import Navbar from "./ui/Navbar"
-
+import VANTA from 'vanta/dist/vanta.net.min.js';
+import Navbar from './ui/Navbar';
+import Footer from './ui/Footer';
 
 export default function Home() {
   const vantaRef = useRef<HTMLDivElement>(null);
@@ -48,7 +49,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <div ref={vantaRef} style={{ width: '100vw', height: '100vh' }}>
+      <div ref={vantaRef} style={{ width: '100%', height: '100vh' }}>
         {/* Contenido de tu página */}
         <div className="welcome">
           <h1>Bienvenidos a BOD</h1>
@@ -59,6 +60,7 @@ export default function Home() {
           </p>
         </div>
       </div>
+      <Footer />
     </>
   );
 }
