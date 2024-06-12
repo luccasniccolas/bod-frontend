@@ -1,10 +1,11 @@
 "use client"
 import React, {useEffect, useState} from "react"
+import Navbar from "./ui/Navbar"
 
 export default function Home() {
 
 
-  /*useEffect(() => {
+  useEffect(() => {
     fetch("http://localhost:3001/api/usuarios").then(
       response => response.json()
     ).then(
@@ -12,9 +13,11 @@ export default function Home() {
         console.log(data)
       }
     )
-  })*/
+  })
 
   return (
+    <>
+    <Navbar />
     <div>
       <div className="welcome">
         <h1>Bienvenidos a BOD</h1>
@@ -24,5 +27,6 @@ export default function Home() {
           repellat reiciendis. Neque, cum!</p>
       </div>
     </div>
+    </>
   )
 }

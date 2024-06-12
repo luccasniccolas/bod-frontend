@@ -27,7 +27,7 @@ export default function Navbar() {
           </ul>
         </div>
         <div className="flex items-center gap-6">
-          <button className="bg-[#a6c1ee] text-white px-5 py-2 rounded-full hover:bg-[#87acec]">Sign in / Sign out</button>
+          <button className="bg-[#a6c1ee] text-white px-5 py-2 rounded-full hover:bg-[#87acec]"><Link href='/login'>Sign in / Sign out</Link></button>
           {menuOpen ? (
             <IoMdClose onClick={onToggleMenu} className="text-3xl cursor-pointer md:hidden" />
           ) : (
