@@ -3,7 +3,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import ProductDetails from './producto/[id]';
 import VANTA from 'vanta/dist/vanta.net.min.js';
+<<<<<<< HEAD
 import Navbar from './ui/Navbar';
+=======
+>>>>>>> parent of 7c5bac1 (vista del carrito implementada, ademas de modificar la vista del login para que no tenga la navbar ni el footer)
 import Footer from './ui/Footer';
 
 export default function Home() {
@@ -12,12 +15,16 @@ export default function Home() {
   useEffect(() => {
     const script1 = document.createElement('script');
     script1.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js';
+<<<<<<< HEAD
     const script1 = document.createElement("script");
     script1.src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js";
+=======
+>>>>>>> parent of 7c5bac1 (vista del carrito implementada, ademas de modificar la vista del login para que no tenga la navbar ni el footer)
     script1.async = true;
 
     const script2 = document.createElement('script');
     script2.src = 'https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js';
+<<<<<<< HEAD
     const script2 = document.createElement("script");
     script2.src = "https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js";
     script2.async = true;
@@ -27,6 +34,13 @@ export default function Home() {
     script1.addEventListener('load', () => {
       document.body.appendChild(script2);
 
+=======
+    script2.async = true;
+
+    document.body.appendChild(script1);
+    script1.addEventListener('load', () => {
+      document.body.appendChild(script2);
+>>>>>>> parent of 7c5bac1 (vista del carrito implementada, ademas de modificar la vista del login para que no tenga la navbar ni el footer)
       script2.addEventListener('load', () => {
         if (vantaRef.current && window.VANTA) {
           window.VANTA.NET({
@@ -40,20 +54,26 @@ export default function Home() {
             scaleMobile: 1.00,
             points: 11.00,
             spacing: 16.00
+<<<<<<< HEAD
             minHeight: 200.0,
             minWidth: 200.0,
             scale: 1.0,
             scaleMobile: 1.0,
             points: 11.0,
             spacing: 16.0,
+=======
+>>>>>>> parent of 7c5bac1 (vista del carrito implementada, ademas de modificar la vista del login para que no tenga la navbar ni el footer)
           });
         }
       });
     });
 
     return () => {
+<<<<<<< HEAD
       script1.removeEventListener('load', () => {});
       script2.removeEventListener('load', () => {});
+=======
+>>>>>>> parent of 7c5bac1 (vista del carrito implementada, ademas de modificar la vista del login para que no tenga la navbar ni el footer)
       script1.removeEventListener('load', () => { });
       script2.removeEventListener('load', () => { });
     };
