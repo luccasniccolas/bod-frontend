@@ -55,7 +55,11 @@ export default function Home() {
   }, []);
 
   const handleProductClick = (productoid) => {
+<<<<<<< HEAD
     router.push(`/productoss/${productoid}`);
+=======
+    router.push(/Productos/${productoid});
+>>>>>>> a6df889a894256c7a2c18a7f5cbb002c0c438cc0
   };
 
   return (
@@ -77,7 +81,7 @@ export default function Home() {
               >
                 <div className="h-64 flex items-center justify-center">
                   <img
-                    src={`${product.url_imagen}`}
+                    src={${product.url_imagen}}
                     alt={product.nombre}
                     className="object-contain h-full"
                   />
