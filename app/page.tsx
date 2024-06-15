@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import ProductDetails from "../Productos/[id]";
+import ProductDetails from "./productoss/[productoid]";
 import VANTA from "vanta/dist/vanta.net.min.js";
 import Footer from "./ui/Footer";
 import Navbar from "./ui/Navbar";
@@ -55,7 +55,7 @@ export default function Home() {
   }, []);
 
   const handleProductClick = (productoid) => {
-    router.push(`/Productos/${productoid}`);
+    router.push(`/productoss/${productoid}`);
   };
 
   return (

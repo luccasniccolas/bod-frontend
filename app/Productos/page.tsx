@@ -1,8 +1,12 @@
 "use client";
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 export default function ProductDetailPage() {
   const [product, setProduct] = useState(null);
+  const router = useRouter();
+  const { productoid } = router.query;
+  console.log(productoid)
 
   useEffect(() => {
     const productId = window.location.pathname.split('/').pop();
