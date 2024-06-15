@@ -1,8 +1,7 @@
-import React from "react";
-import Head from "next/head";
-import Link from "next/link";
-import { FaFacebook, FaGoogle, FaRegEnvelope } from "react-icons/fa";
-import { MdLockOutline } from "react-icons/md";
+import React from 'react';
+import Link from 'next/link';
+import { FaFacebook, FaGoogle, FaRegEnvelope } from 'react-icons/fa';
+import { MdLockOutline } from 'react-icons/md';
 
 function AuthForm() {
   return (
@@ -17,29 +16,48 @@ function AuthForm() {
               </h2>
               <div className="border-2 w-10 border-green-500 inline-block mb-2"></div>
               <div className="flex justify-center my-2">
-                <Link href='#' className="border-2 border-gray-200 rounded-full p-3 mx-1" ><FaFacebook className="text-sm" /></Link>
-                <Link href='#' className="border-2 border-gray-200 rounded-full p-3 mx-1" ><FaGoogle className="text-sm" /></Link>
+                <Link href="#" className="border-2 border-gray-200 rounded-full p-3 mx-1">
+                  <FaFacebook className="text-sm" />
+                </Link>
+                <Link href="#" className="border-2 border-gray-200 rounded-full p-3 mx-1">
+                  <FaGoogle className="text-sm" />
+                </Link>
               </div>
               <p className="text-gray-400 my-3">o usa tu correo registrado</p>
               <div className="flex flex-col items-center">
                 <div className="bg-gray-100 w-64 p-2 flex items-center mb-3">
-                    <FaRegEnvelope className="text-gray-400 mr-2" />
-                    <input type="email" name="email" placeholder="Email" className="bg-gray-100 outline-none text-sm flex-1" />
+                  <FaRegEnvelope className="text-gray-400 mr-2" />
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    className="bg-gray-100 outline-none text-sm flex-1"
+                  />
                 </div>
                 <div className="bg-gray-100 w-64 p-2 flex items-center mb-3">
-                    <MdLockOutline className="text-gray-400 mr-2" />
-                    <input type="password" name="password" placeholder="Contraseña" className="bg-gray-100 outline-none text-sm flex-1" />
+                  <MdLockOutline className="text-gray-400 mr-2" />
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="Contraseña"
+                    className="bg-gray-100 outline-none text-sm flex-1"
+                  />
                 </div>
                 <div className="flex justify-between w-64 mb-5">
-                    <label className="flex items-center text-xs"><input type="checkbox" name="remember" className="mr-1" />Recuerdame</label>
-                    <Link href='#' className="text-xs">Olvidaste tu contraseña?</Link>
+                  <label className="flex items-center text-xs">
+                    <input type="checkbox" name="remember" className="mr-1" />
+                    Recuerdame
+                  </label>
+                  <Link href="#" className="text-xs">
+                    Olvidaste tu contraseña?
+                  </Link>
                 </div>
                 <Link
-              href="#"
-              className="border-2 border-green-500 text-green-500 rounded-full px-12 py-2 inline-block font-semibold hover:bg-green-500 hover:text-white"
-            >
-              Iniciar Sesión
-            </Link>
+                  href="#"
+                  className="border-2 border-green-500 text-green-500 rounded-full px-12 py-2 inline-block font-semibold hover:bg-green-500 hover:text-white"
+                >
+                  Iniciar Sesión
+                </Link>
               </div>
             </div>
           </div>
