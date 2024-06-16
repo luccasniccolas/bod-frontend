@@ -2,22 +2,58 @@
 import React, { useEffect, useRef, useState } from "react";
 import VANTA from "vanta/dist/vanta.net.min.js";
 import { useRouter } from 'next/navigation';
+import { useCart } from "../../context/CartContext";
 
 interface CartItem {
   id: string;
   name: string;
   price: number;
   quantity: number;
+  url_imagen: string;
 }
 
-async function getProduct(id: any) {
+interface Product {
+  productoid: string;
+  nombre: string;
+  descripcion: string;
+  precio: string;
+  url_imagen: string;
+}
+
+async function getProduct(id: any): Promise<Product> {
   const res = await fetch(`http://localhost:3001/api/productos/${id}`);
   const data = await res.json();
   return data;
 }
 
-const ProductDetailPage = async ({ params }) => {
-  const product = await getProduct(params.productoid);
+const ProductDetailPage = ({ params }) => {
+  const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const productData = await getProduct(params.productoid);
+        setProduct(productData);
+      } catch (err) {
+        setError('Error fetching product data');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
+  }, [params.productoid]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
   return <ProductDetails product={product} />;
 };
 
@@ -25,18 +61,18 @@ const ProductDetails = ({ product }) => {
   const vantaRef = useRef<HTMLDivElement>(null);
   const [selectedSize, setSelectedSize] = useState<string>("m");
   const sizes = ["xs", "s", "m", "l", "xl"];
-  const router = useRouter();
+  const { addToCart } = useCart();
 
   const handleAddToCart = () => {
     const cartItem: CartItem = {
-      id: product.id,
+      id: product.productoid,
       name: product.nombre,
       price: product.precio,
-      quantity: 1, // Cantidad inicial de 1
+      quantity: 1,
+      url_imagen: product.url_imagen.trim(), // Elimina los espacios en blanco
     };
 
-    // Llama a la función handleAddToCart en el componente CartPage
-    router.refresh();
+    addToCart(cartItem);
   };
 
   useEffect(() => {
@@ -76,6 +112,10 @@ const ProductDetails = ({ product }) => {
     };
   }, []);
 
+  if (!product) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="bg-gray-100 min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -83,7 +123,7 @@ const ProductDetails = ({ product }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
             <div className="flex justify-center">
               <img
-                src={product.url_imagen}
+                src={product.url_imagen.trim()} // Elimina los espacios en blanco
                 alt={product.nombre}
                 className="max-w-full h-auto rounded-lg shadow-md"
               />
@@ -118,11 +158,10 @@ const ProductDetails = ({ product }) => {
                 </label>
                 <select
                   id="talla"
-                  value={selectedSize}
-                  onChange={(e) => setSelectedSize(e.target.value)}
+                  defaultValue="m"
                   className="px-2 py-1 border border-gray-300 rounded"
                 >
-                  {sizes.map((size) => (
+                  {sizes.map(size => (
                     <option key={size} value={size}>
                       {size.toUpperCase()}
                     </option>

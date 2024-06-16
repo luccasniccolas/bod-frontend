@@ -2,6 +2,7 @@ import { Montserrat } from "next/font/google";
 import "./ui/globals.css";
 import Navbar from "./ui/Navbar";
 import Footer from "./ui/Footer";
+import { CartProvider } from "./context/CartContext";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -14,9 +15,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={montserrat.className}>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <CartProvider> {/* Envuelve todo el contenido con el CartProvider */}
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );
