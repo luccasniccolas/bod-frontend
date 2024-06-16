@@ -8,16 +8,31 @@ interface CartItem {
   quantity: number;
 }
 
-export default function CartPage() {
+function useCartStore() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
-  const handleAddToCart = (item: CartItem) => {
-    setCartItems([...cartItems, item]);
+  const addToCart = (item: CartItem) => {
+    const existingItem = cartItems.find((cartItem) => cartItem.id === item.id);
+
+    if (existingItem) {
+      const updatedCartItems = cartItems.map((cartItem) =>
+        cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+      );
+      setCartItems(updatedCartItems);
+    } else {
+      setCartItems([...cartItems, item]);
+    }
   };
 
-  const handleRemoveFromCart = (itemId: number) => {
+  const removeFromCart = (itemId: number) => {
     setCartItems(cartItems.filter((item) => item.id !== itemId));
   };
+
+  return { cartItems, addToCart, removeFromCart };
+}
+
+export default function CartPage() {
+  const { cartItems, addToCart, removeFromCart } = useCartStore();
 
   return (
     <section className="relative z-10 after:contents-[''] after:absolute after:z-0 after:h-full xl:after:w-1/3 after:top-0 after:right-0 after:bg-gray-50">
@@ -98,8 +113,8 @@ export default function CartPage() {
                       </div>
                     </div>
                     <div className="flex items-center max-[500px]:justify-center md:justify-end max-md:mt-3 h-full">
-                      <p className="font-bold text-lg leading-8 text-gray-600 text-center transition-all duration-300 group-hover:text-indigo-600">
-                        ${item.price * item.quantity}
+                      <p className="font-bold text-lg leading-8 text-gray-600text-center transition-all duration-300 group-hover:text-indigo-600">
+                      ${item.price * item.quantity}
                       </p>
                     </div>
                   </div>
