@@ -16,7 +16,9 @@ export default function Navbar() {
     <header>
       <nav className="flex justify-between items-center w-[92%] mx-auto">
         <div>
-          <img src="/images/bod/logo-formatted.png" className="w-16" alt="Logo" />
+          <Link href="/">
+            <img src="/images/bod/logo-formatted.png" className="w-16 cursor-pointer" alt="Logo" />
+          </Link>
         </div>
         <div
           className={`nav-links duration-500 md:static absolute bg-white md:min-h-fit min-h-[60vh] left-0 ${
