@@ -40,7 +40,6 @@ img, video, svg { height: auto; max-width: 100%; }
 footer {
   background-color: #5c5c5c;
   border-top: none;
-  margin-top: -1px; /* Ajusta el valor según sea necesario */
 }
 
 header {
