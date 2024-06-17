@@ -43,7 +43,7 @@ export default function Navbar() {
             </li>
             <li>
               <Link className="hover:text-white" href="#">
-                Accesorios
+                Otros
               </Link>
             </li>
           </ul>

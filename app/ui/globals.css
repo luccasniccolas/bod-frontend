@@ -7,12 +7,17 @@
 html, body {
   width: 100%;
   overflow-x: hidden;
+  height: 100%;
+
 }
 
 #__next {
   width: 100%;
   overflow-x: hidden;
+  height: 100%;
+
 }
+
 
 body { min-height: 100dvh;}
 input, button, textarea, select { font: inherit; }

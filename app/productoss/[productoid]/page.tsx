@@ -117,28 +117,23 @@ const ProductDetails = ({ product }) => {
   }
 
   return (
-    <div className="bg-gray-100 min-h-screen py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
-            <div className="flex justify-center">
+    <div ref={vantaRef} className="w-full">
+    <div className=" min-h-screen py-12 flex flex-col">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-grow">
+        <div className="bg-white rounded-lg shadow-lg overflow-hidden p-8">
+          <div className="md:flex">
+            <div className="md:w-1/2 md:pr-8 flex justify-center">
               <img
-                src={product.url_imagen.trim()} // Elimina los espacios en blanco
+                src={product.url_imagen.trim()}
                 alt={product.nombre}
                 className="max-w-full h-auto rounded-lg shadow-md"
               />
             </div>
-            <div className="space-y-4">
+            <div className="md:w-1/2 md:pl-8 space-y-4">
               <h1 className="text-3xl font-bold text-gray-800">{product.nombre}</h1>
               <p className="text-2xl font-semibold text-gray-600">Precio: ${product.precio}</p>
               <p className="text-gray-700">{product.descripcion}</p>
               <div className="flex items-center space-x-4">
-                <button
-                  onClick={handleAddToCart}
-                  className="bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 px-4 rounded"
-                >
-                  Agregar al carrito
-                </button>
                 <div>
                   <label htmlFor="cantidad" className="mr-2 text-gray-700">
                     Cantidad:
@@ -167,12 +162,19 @@ const ProductDetails = ({ product }) => {
                     </option>
                   ))}
                 </select>
+                
               </div>
+              <button
+                  onClick={handleAddToCart}
+                  className="bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 px-4 rounded"
+                >
+                  Agregar al carrito
+                </button>
             </div>
           </div>
         </div>
       </div>
-      <div ref={vantaRef} style={{ width: "100%", height: "100vh" }}></div>
+      </div>
     </div>
   );
 };
