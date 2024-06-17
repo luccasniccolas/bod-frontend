@@ -71,21 +71,23 @@ export default function Home() {
             {data.map((product) => (
               <div
                 key={product.productoid}
-                className="mt-16 mx-3 bg-white rounded-lg shadow-md p-8 relative"
+                className="mt-16 mx-3 bg-[#b4b4b4] rounded-lg shadow-md p-8 relative"
               >
-                <div className="h-64 flex items-center justify-center">
+                <div className="h-64 flex items-center justify-center relative">
                   <img
                     src={`${product.url_imagen}`}
                     alt={product.nombre}
                     className="object-contain h-full"
                   />
+                  <div className="absolute inset-0 flex items-center justify-center hover:bg-opacity-50 transition-opacity duration-300">
+                    <span
+                      className="text-white font-bold text-2xl opacity-0 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                      onClick={() => handleProductClick(product.productoid)}
+                    >
+                      Ver detalles
+                    </span>
+                  </div>
                 </div>
-                <button
-                  className="absolute bottom-4 right-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded opacity-1"
-                  onClick={() => handleProductClick(product.productoid)}
-                >
-                  Ver detalles
-                </button>
                 <h2 className="text-xl font-bold mb-2">{product.nombre}</h2>
                 <p className="text-gray-700">${product.precio}</p>
               </div>
