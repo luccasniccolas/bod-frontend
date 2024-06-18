@@ -1,49 +1,41 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import ProductDetails from "./productoss/[productoid]/page";
-import VANTA from "vanta/dist/vanta.net.min.js";
 
-export default function Home() {
+export default function Home({ searchTerm }) {
   const vantaRef = useRef<HTMLDivElement>(null);
   const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
-    const script1 = document.createElement("script");
-    script1.src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js";
-    script1.async = true;
+    const threeScript = document.createElement("script");
+    threeScript.src = "/three.min.js";
+    threeScript.async = true;
+    document.body.appendChild(threeScript);
 
-    const script2 = document.createElement("script");
-    script2.src = "https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js";
-    script2.async = true;
+    const vantaScript = document.createElement("script");
+    vantaScript.src = "/vanta.net.min.js";
+    vantaScript.async = true;
+    document.body.appendChild(vantaScript);
 
-    document.body.appendChild(script1);
-    script1.addEventListener("load", () => {
-      document.body.appendChild(script2);
-      script2.addEventListener("load", () => {
-        if (vantaRef.current && window.VANTA) {
-          window.VANTA.NET({
-            el: vantaRef.current,
-            mouseControls: true,
-            backgroundColor: 0x222426,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.0,
-            minWidth: 200.0,
-            scale: 1.0,
-            scaleMobile: 1.0,
-            points: 11.0,
-            spacing: 16.0,
-          });
-        }
-      });
+    vantaScript.addEventListener("load", () => {
+      if (vantaRef.current && window.VANTA) {
+        window.VANTA.NET({
+          el: vantaRef.current,
+          mouseControls: true,
+          backgroundColor: 0x222426,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.0,
+          minWidth: 200.0,
+          scale: 1.0,
+          scaleMobile: 1.0,
+          points: 11.0,
+          spacing: 16.0,
+        });
+      }
     });
-
-    return () => {
-      script1.removeEventListener("load", () => {});
-      script2.removeEventListener("load", () => {});
-    };
   }, []);
 
   useEffect(() => {
@@ -51,6 +43,18 @@ export default function Home() {
       .then((response) => response.json())
       .then((data) => setData(data));
   }, []);
+
+  useEffect(() => {
+    if (searchTerm) {
+      setFilteredData(
+        data.filter((product) =>
+          product.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      );
+    } else {
+      setFilteredData(data);
+    }
+  }, [searchTerm, data]);
 
   const handleProductClick = (productoid) => {
     router.push(`/productoss/${productoid}`);
@@ -68,7 +72,7 @@ export default function Home() {
         </div>
         <div ref={vantaRef} style={{ width: "100%", height: "100vh" }}>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-auto max-w-7xl">
-            {data.map((product) => (
+            {filteredData.map((product) => (
               <div
                 key={product.productoid}
                 className="mt-16 mx-3 bg-[#b4b4b4] rounded-lg shadow-md p-8 relative"

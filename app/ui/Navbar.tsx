@@ -5,12 +5,32 @@ import { FiMenu, FiShoppingCart } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";
 import "./globals.css";
 
-export default function Navbar() {
+export default function Navbar({ onSearch }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const onToggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    onSearch(searchTerm);
+  };
+
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    // Aquí puedes implementar la lógica de búsqueda
+    console.log('Searching for:', searchQuery);
+  };
+
+  
 
   return (
     <header>
