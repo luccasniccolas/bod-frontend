@@ -27,22 +27,22 @@ export default function Navbar() {
         >
           <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
             <li>
-              <Link className="hover:text-white" href="#">
+              <Link className="hover:text-white" href="/polerones">
                 Polerones
               </Link>
             </li>
             <li>
-              <Link className="hover:text-white" href="#">
+              <Link className="hover:text-white" href="/poleras">
                 Poleras
               </Link>
             </li>
             <li>
-              <Link className="hover:text-white" href="#">
+              <Link className="hover:text-white" href="/pantalones">
                 Pantalones
               </Link>
             </li>
             <li>
-              <Link className="hover:text-white" href="#">
+              <Link className="hover:text-white" href="/otros">
                 Otros
               </Link>
             </li>
