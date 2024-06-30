@@ -124,7 +124,7 @@ const ProductDetails = ({ product }) => {
           <div className="md:flex">
             <div className="md:w-1/2 md:pr-8 flex justify-center">
               <img
-                src={product.url_imagen.trim()}
+                src={product.urlimagen.trim()}
                 alt={product.nombre}
                 className="max-w-full h-auto rounded-lg shadow-md"
               />
@@ -132,7 +132,13 @@ const ProductDetails = ({ product }) => {
             <div className="md:w-1/2 md:pl-8 space-y-4">
               <h1 className="text-3xl font-bold text-gray-800">{product.nombre}</h1>
               <p className="text-2xl font-semibold text-gray-600">Precio: ${product.precio}</p>
-              <p className="text-gray-700">{product.descripcion}</p>
+              <div className="text-gray-700 whitespace-pre-line">
+                {product.descripcion.split('\\n').map((line, index) => (
+                  <p key={index} className={line.trim().startsWith('*') ? 'ml-4' : ''}>
+                    {line.trim()}
+                  </p>
+                ))}
+              </div>
               <div className="flex items-center space-x-4">
                 <div>
                   <label htmlFor="cantidad" className="mr-2 text-gray-700">

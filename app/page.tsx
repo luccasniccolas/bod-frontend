@@ -79,7 +79,7 @@ export default function Home({ searchTerm }) {
               >
                 <div className="h-64 flex items-center justify-center relative">
                   <img
-                    src={`${product.url_imagen}`}
+                    src={`${product.urlimagen}`}
                     alt={product.nombre}
                     className="object-contain h-full"
                   />
