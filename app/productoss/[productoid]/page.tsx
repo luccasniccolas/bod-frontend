@@ -69,7 +69,7 @@ const ProductDetails = ({ product }) => {
       name: product.nombre,
       price: product.precio,
       quantity: 1,
-      url_imagen: product.url_imagen.trim(), // Elimina los espacios en blanco
+      urlimagen: product.urlimagen, // Elimina los espacios en blanco
     };
 
     addToCart(cartItem);
@@ -124,7 +124,7 @@ const ProductDetails = ({ product }) => {
           <div className="md:flex">
             <div className="md:w-1/2 md:pr-8 flex justify-center">
               <img
-                src={product.urlimagen.trim()}
+                src={product.urlimagen}
                 alt={product.nombre}
                 className="max-w-full h-auto rounded-lg shadow-md"
               />
