@@ -43,13 +43,14 @@ export default function Home() {
 
   useEffect(() => {
 
-    fetch("http://localhost:3001/api/productos")
+    fetch("http://localhost:3001/api/productos/get")
       .then((response) => response.json())
       .then((data) => {
         setData(data);
         setFilteredData(data);
       });
   }, []);
+  console.log(data)
 
   useEffect(() => {
     let filtered = data;
@@ -100,7 +101,7 @@ export default function Home() {
               >
                 <div className="h-64 flex items-center justify-center relative">
                   <img
-                    src={`${product.urlimagen}`}
+                    src={`${product.primera_url}`}
                     alt={product.nombre}
                     className="object-contain h-full"
                   />

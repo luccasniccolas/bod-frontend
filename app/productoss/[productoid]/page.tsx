@@ -17,12 +17,13 @@ interface Product {
   nombre: string;
   descripcion: string;
   precio: string;
-  url_imagen: string;
+  url_imagen: string[];
 }
 
 async function getProduct(id: any): Promise<Product> {
-  const res = await fetch(`http://localhost:3001/api/productos/${id}`);
+  const res = await fetch(`http://localhost:3001/api/productos/get/${id}`);
   const data = await res.json();
+  console.log(data)
   return data;
 }
 
@@ -124,7 +125,7 @@ const ProductDetails = ({ product }) => {
           <div className="md:flex">
             <div className="md:w-1/2 md:pr-8 flex justify-center">
               <img
-                src={product.urlimagen}
+                src={product.imagenes[0]}
                 alt={product.nombre}
                 className="max-w-full h-auto rounded-lg shadow-md"
               />
