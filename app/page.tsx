@@ -76,6 +76,10 @@ export default function Home() {
 
     setFilteredData(filtered);
   }, [searchTerm, selectedCategory, data]);
+  
+  const handleProductClick = (productoid) => {
+    router.push(`/productoss/${productoid}`);
+  };
 
   return (
     <>
