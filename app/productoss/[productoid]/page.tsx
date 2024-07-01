@@ -17,12 +17,13 @@ interface Product {
   nombre: string;
   descripcion: string;
   precio: string;
-  url_imagen: string;
+  url_imagen: string[];
 }
 
 async function getProduct(id: any): Promise<Product> {
-  const res = await fetch(`http://localhost:3001/api/productos/${id}`);
+  const res = await fetch(`http://localhost:3001/api/productos/get/${id}`);
   const data = await res.json();
+  console.log(data)
   return data;
 }
 
@@ -69,7 +70,7 @@ const ProductDetails = ({ product }) => {
       name: product.nombre,
       price: product.precio,
       quantity: 1,
-      url_imagen: product.url_imagen.trim(), // Elimina los espacios en blanco
+      urlimagen: product.urlimagen, // Elimina los espacios en blanco
     };
 
     addToCart(cartItem);
@@ -120,11 +121,11 @@ const ProductDetails = ({ product }) => {
     <div ref={vantaRef} className="w-full">
     <div className=" min-h-screen py-12 flex flex-col">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-grow">
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden p-8">
+        <div className="bg-[#BCBBBB] rounded-lg shadow-lg overflow-hidden p-8">
           <div className="md:flex">
             <div className="md:w-1/2 md:pr-8 flex justify-center">
               <img
-                src={product.url_imagen.trim()}
+                src={product.imagenes[0]}
                 alt={product.nombre}
                 className="max-w-full h-auto rounded-lg shadow-md"
               />
@@ -132,7 +133,13 @@ const ProductDetails = ({ product }) => {
             <div className="md:w-1/2 md:pl-8 space-y-4">
               <h1 className="text-3xl font-bold text-gray-800">{product.nombre}</h1>
               <p className="text-2xl font-semibold text-gray-600">Precio: ${product.precio}</p>
-              <p className="text-gray-700">{product.descripcion}</p>
+              <div className="text-gray-700 whitespace-pre-line">
+                {product.descripcion.split('\\n').map((line, index) => (
+                  <p key={index} className={line.trim().startsWith('*') ? 'ml-4' : ''}>
+                    {line.trim()}
+                  </p>
+                ))}
+              </div>
               <div className="flex items-center space-x-4">
                 <div>
                   <label htmlFor="cantidad" className="mr-2 text-gray-700">
@@ -166,7 +173,7 @@ const ProductDetails = ({ product }) => {
               </div>
               <button
                   onClick={handleAddToCart}
-                  className="bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 px-4 rounded"
+                  className="bg-pink-600 hover:bg-[#242424] text-white font-semibold py-2 px-4 rounded"
                 >
                   Agregar al carrito
                 </button>
