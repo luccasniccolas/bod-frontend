@@ -1,12 +1,15 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
+import { useSearch } from './ClientRootLayout';
 
-export default function Home({ searchTerm }) {
+export default function Home() {
+  const { searchTerm, selectedCategory } = useSearch();
   const vantaRef = useRef<HTMLDivElement>(null);
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const router = useRouter();
+  
 
   useEffect(() => {
     const threeScript = document.createElement("script");
@@ -39,26 +42,40 @@ export default function Home({ searchTerm }) {
   }, []);
 
   useEffect(() => {
+
     fetch("http://localhost:3001/api/productos")
       .then((response) => response.json())
-      .then((data) => setData(data));
+      .then((data) => {
+        setData(data);
+        setFilteredData(data);
+      });
   }, []);
 
   useEffect(() => {
-    if (searchTerm) {
-      setFilteredData(
-        data.filter((product) =>
-          product.nombre.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-      );
-    } else {
-      setFilteredData(data);
-    }
-  }, [searchTerm, data]);
+    let filtered = data;
 
-  const handleProductClick = (productoid) => {
-    router.push(`/productoss/${productoid}`);
-  };
+    if (searchTerm) {
+      filtered = filtered.filter((product) =>
+        product.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    if (selectedCategory) {
+      const categoryMap = {
+        'Poleras': 2,
+        'Pantalones': 3,
+        'Polerones': 4,
+        'Otros': 5
+      };
+      const categoryId = categoryMap[selectedCategory];
+      
+      if (categoryId) {
+        filtered = filtered.filter((product) => product.categoriaid === categoryId);
+      }
+    }
+
+    setFilteredData(filtered);
+  }, [searchTerm, selectedCategory, data]);
 
   return (
     <>

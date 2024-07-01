@@ -5,7 +5,10 @@ import { FiMenu, FiShoppingCart } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";
 import "./globals.css";
 
-export default function Navbar({ onSearch }) {
+import { useSearch } from "../ClientRootLayout";
+
+export default function Navbar() {
+  const { handleSearch, handleCategorySelect } = useSearch();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -19,18 +22,12 @@ export default function Navbar({ onSearch }) {
 
   const handleSearchSubmit = (event) => {
     event.preventDefault();
-    onSearch(searchTerm);
+    handleSearch(searchTerm);
   };
 
-  const [searchQuery, setSearchQuery] = useState('');
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    // Aquí puedes implementar la lógica de búsqueda
-    console.log('Searching for:', searchQuery);
+  const handleCategoryClick = (category) => {
+    handleCategorySelect(category);
   };
-
-  
 
   return (
     <header>
@@ -47,28 +44,40 @@ export default function Navbar({ onSearch }) {
         >
           <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
             <li>
-              <Link className="hover:text-white" href="#">
+              <button className="hover:text-white" onClick={() => handleCategoryClick("Polerones")}>
                 Polerones
-              </Link>
+              </button>
             </li>
             <li>
-              <Link className="hover:text-white" href="#">
+              <button className="hover:text-white" onClick={() => handleCategoryClick("Poleras")}>
                 Poleras
-              </Link>
+              </button>
             </li>
             <li>
-              <Link className="hover:text-white" href="#">
+              <button className="hover:text-white" onClick={() => handleCategoryClick("Pantalones")}>
                 Pantalones
-              </Link>
+              </button>
             </li>
             <li>
-              <Link className="hover:text-white" href="#">
+              <button className="hover:text-white" onClick={() => handleCategoryClick("Otros")}>
                 Otros
-              </Link>
+              </button>
             </li>
           </ul>
         </div>
         <div className="flex items-center gap-6">
+          <form onSubmit={handleSearchSubmit}>
+            <input
+              type="text"
+              placeholder="Buscar..."
+              value={searchTerm}
+              onChange={handleSearchChange}
+              className="px-2 py-1 border rounded"
+            />
+            <button type="submit" className="ml-2 bg-[#A10058] text-white px-3 py-1 rounded">
+              Buscar
+            </button>
+          </form>
           <button className="bg-[#A10058] text-white px-5 py-2 rounded-full hover:bg-[#242424]">
             <Link href="/login">Sign in / Sign out</Link>
           </button>
