@@ -1,10 +1,10 @@
 "use client";
 import React, { useContext } from "react";
 import { CartContext } from "../context/CartContext";
+import Link from "next/link";
 
 const CartPage = () => {
   const { cartItems, addToCart, removeFromCart, decrementCartItem } = useContext(CartContext);
- 
 
   return (
     <section className="relative z-10 after:content-[''] after:absolute after:z-0 after:h-full xl:after:w-1/3 after:top-0 after:right-0 after:bg-gray-50">
@@ -47,44 +47,44 @@ const CartPage = () => {
                       </div>
                     </div>
                     <div className="flex items-center max-[500px]:justify-center h-full max-md:mt-3">
-                    <div className="flex items-center h-full">
-                      <button
-                        onClick={() => decrementCartItem(item.id)}
-                        className="group rounded-l-xl py-[19px] px-4 border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:bg-gray-50 hover:border-gray-300 hover:shadow-gray-300 focus-within:outline-gray-300"
-                      >
-                        <svg
-                          className="stroke-gray-900 transition-all duration-500 group-hover:stroke-black"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="22"
-                          height="22"
-                          viewBox="0 0 22 22"
-                          fill="none"
+                      <div className="flex items-center h-full">
+                        <button
+                          onClick={() => decrementCartItem(item.id)}
+                          className="group rounded-l-xl py-[19px] px-4 border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:bg-gray-50 hover:border-gray-300 hover:shadow-gray-300 focus-within:outline-gray-300"
                         >
-                          <path d="M16.5 11H5.5" stroke="" strokeWidth="1.6" strokeLinecap="round" />
-                        </svg>
-                      </button>
-                      <input
-                        type="text"
-                        className="border-y border-gray-200 outline-none text-gray-900 font-semibold text-lg w-full max-w-[73px] min-w-[60px] placeholder:text-gray-900 py-[10px] px-4 text-center bg-transparent"
-                        placeholder={item.quantity.toString()}
-                        readOnly
-                      />
-                      <button
-                        onClick={() => addToCart(item)}
-                        className="group rounded-r-xl py-[19px] px-4 border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:bg-gray-50 hover:border-gray-300 hover:shadow-gray-300 focus-within:outline-gray-300"
-                      >
-                        <svg
-                          className="stroke-gray-900 transition-all duration-500 group-hover:stroke-black"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="22"
-                          height="22"
-                          viewBox="0 0 22 22"
-                          fill="none"
+                          <svg
+                            className="stroke-gray-900 transition-all duration-500 group-hover:stroke-black"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="22"
+                            height="22"
+                            viewBox="0 0 22 22"
+                            fill="none"
+                          >
+                            <path d="M16.5 11H5.5" stroke="" strokeWidth="1.6" strokeLinecap="round" />
+                          </svg>
+                        </button>
+                        <input
+                          type="text"
+                          className="border-y border-gray-200 outline-none text-gray-900 font-semibold text-lg w-full max-w-[73px] min-w-[60px] placeholder:text-gray-900 py-[10px] px-4 text-center bg-transparent"
+                          placeholder={item.quantity.toString()}
+                          readOnly
+                        />
+                        <button
+                          onClick={() => addToCart(item)}
+                          className="group rounded-r-xl py-[19px] px-4 border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:bg-gray-50 hover:border-gray-300 hover:shadow-gray-300 focus-within:outline-gray-300"
                         >
-                          <path d="M11 5.5V16.5M16.5 11H5.5" stroke="" strokeWidth="1.6" strokeLinecap="round" />
-                        </svg>
-                      </button>
-                    </div>
+                          <svg
+                            className="stroke-gray-900 transition-all duration-500 group-hover:stroke-black"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="22"
+                            height="22"
+                            viewBox="0 0 22 22"
+                            fill="none"
+                          >
+                            <path d="M11 5.5V16.5M16.5 11H5.5" stroke="" strokeWidth="1.6" strokeLinecap="round" />
+                          </svg>
+                        </button>
+                      </div>
                     </div>
                     <div className="flex items-center max-[500px]:justify-center md:justify-end max-md:mt-3 h-full">
                       <p className="font-bold text-lg leading-8 text-gray-600 text-center transition-all duration-300 group-hover:text-indigo-600">
@@ -105,6 +105,13 @@ const CartPage = () => {
                   ${cartItems.reduce((total, item) => total + item.price * item.quantity, 0)}
                 </p>
               </div>
+              <div className="mt-8 flex justify-end">
+              <Link href="/checkout" legacyBehavior>
+                <a className="bg-[#A10058] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-[#242424]">
+                  Proceder al Pago
+                </a>
+              </Link>
+            </div>
               {/* Aquí puedes agregar más detalles del resumen del pedido */}
             </div>
           </div>

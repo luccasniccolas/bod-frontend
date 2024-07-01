@@ -120,7 +120,7 @@ const ProductDetails = ({ product }) => {
     <div ref={vantaRef} className="w-full">
     <div className=" min-h-screen py-12 flex flex-col">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-grow">
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden p-8">
+        <div className="bg-[#BCBBBB] rounded-lg shadow-lg overflow-hidden p-8">
           <div className="md:flex">
             <div className="md:w-1/2 md:pr-8 flex justify-center">
               <img
@@ -172,7 +172,7 @@ const ProductDetails = ({ product }) => {
               </div>
               <button
                   onClick={handleAddToCart}
-                  className="bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 px-4 rounded"
+                  className="bg-pink-600 hover:bg-[#242424] text-white font-semibold py-2 px-4 rounded"
                 >
                   Agregar al carrito
                 </button>
