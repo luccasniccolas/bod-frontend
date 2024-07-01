@@ -44,22 +44,22 @@ export default function Navbar() {
         >
           <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
             <li>
-              <button className="hover:text-white" onClick={() => handleCategoryClick("Polerones")}>
+              <button className="hover:text-white" onClick={() => handleCategoryClick("polerones")}>
                 Polerones
               </button>
             </li>
             <li>
-              <button className="hover:text-white" onClick={() => handleCategoryClick("Poleras")}>
+              <button className="hover:text-white" onClick={() => handleCategoryClick("poleras")}>
                 Poleras
               </button>
             </li>
             <li>
-              <button className="hover:text-white" onClick={() => handleCategoryClick("Pantalones")}>
+              <button className="hover:text-white" onClick={() => handleCategoryClick("pantalones")}>
                 Pantalones
               </button>
             </li>
             <li>
-              <button className="hover:text-white" onClick={() => handleCategoryClick("Otros")}>
+              <button className="hover:text-white" onClick={() => handleCategoryClick("otros")}>
                 Otros
               </button>
             </li>

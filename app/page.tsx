@@ -54,27 +54,32 @@ export default function Home() {
 
   useEffect(() => {
     let filtered = data;
-
+  
+    console.log('Initial data:', data);
+    console.log('Selected category:', selectedCategory);
+    console.log('Search term:', searchTerm);
+  
     if (searchTerm) {
       filtered = filtered.filter((product) =>
         product.nombre.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
-
+  
     if (selectedCategory) {
       const categoryMap = {
-        'Poleras': 2,
-        'Pantalones': 3,
-        'Polerones': 4,
-        'Otros': 5
+        'poleras': 2,
+        'pantalones': 3,
+        'polerones': 1,
+        'otros': 4
       };
       const categoryId = categoryMap[selectedCategory];
       
       if (categoryId) {
-        filtered = filtered.filter((product) => product.categoriaid === categoryId);
+        filtered = filtered.filter((product) => Number(product.categoriaid) === categoryId);
       }
     }
-
+  
+    console.log('Filtered data:', filtered);
     setFilteredData(filtered);
   }, [searchTerm, selectedCategory, data]);
   
