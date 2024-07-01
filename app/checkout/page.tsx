@@ -56,7 +56,7 @@ const CheckoutPage = () => {
               className="bg-[#A10058] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-[#242424]"
               type="button"
             >
-              Realizar Pago
+              Continuar al Pago
             </button>
           </form>
         </div>
