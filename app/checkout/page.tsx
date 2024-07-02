@@ -32,6 +32,8 @@ const CheckoutPage = () => {
       if (response.ok) {
         const result = await response.json();
         console.log('Checkout completado:', result);
+        window.location.href = '/';
+
         // Aquí puedes manejar la respuesta exitosa, como mostrar un mensaje al usuario
       } else {
         console.error('Error en el checkout');
@@ -113,8 +115,8 @@ const CheckoutPage = () => {
             <button
               className="bg-[#A10058] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-[#242424]"
               type="submit"
-            >
-              Checkout
+              
+            >Checkout
             </button>
           </form>
         </div>

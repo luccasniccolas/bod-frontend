@@ -6,7 +6,7 @@ interface CartItem {
   name: string;
   price: number;
   quantity: number;
-  url_imagen: string;
+  primera_url: string;
 }
 
 interface CartContextData {

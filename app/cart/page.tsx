@@ -34,7 +34,7 @@ const CartPage = () => {
               {cartItems.map((item) => (
                 <li key={item.id} className="flex flex-col min-[500px]:flex-row min-[500px]:items-center gap-5 py-6 border-b border-gray-200 group">
                   <div className="w-full md:max-w-[126px]">
-                    <img src={item.urlimagen} alt={item.name} className="mx-auto" />
+                    <img src={item.primera_url} alt={item.name} className="mx-auto" />
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-4 w-full">
                     <div className="md:col-span-2">
