@@ -1,9 +1,47 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
 
 const CheckoutPage = () => {
   const { cartItems } = useContext(CartContext);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    telefono: '',
+    address: '',
+    city: ''
+  });
+
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('http://localhost:3001/api/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      
+      console.log('datos: ', formData)
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Checkout completado:', result);
+        // Aquí puedes manejar la respuesta exitosa, como mostrar un mensaje al usuario
+      } else {
+        console.error('Error en el checkout');
+        // Manejar el error, tal vez mostrar un mensaje al usuario
+      }
+    } catch (error) {
+      console.error('Error al enviar el formulario:', error);
+      // Manejar errores de red o del servidor
+    }
+  };
 
   return (
     <section className="container mx-auto p-8">
@@ -11,7 +49,7 @@ const CheckoutPage = () => {
         {/* Formulario de Checkout */}
         <div className="lg:w-2/3 w-full bg-white p-8 rounded shadow-lg">
           <h2 className="text-2xl font-bold mb-6">Información</h2>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
                 Nombre Completo
@@ -20,6 +58,20 @@ const CheckoutPage = () => {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="name"
                 type="text"
+                value={formData.name}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+                Correo
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="email"
+                type="email"
+                value={formData.email}
+                onChange={handleInputChange}
               />
             </div>
             <div className="mb-4">
@@ -29,7 +81,9 @@ const CheckoutPage = () => {
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="telefono"
-                type="telefono"
+                type="tel"
+                value={formData.telefono}
+                onChange={handleInputChange}
               />
             </div>
             <div className="mb-4">
@@ -40,6 +94,8 @@ const CheckoutPage = () => {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="address"
                 type="text"
+                value={formData.address}
+                onChange={handleInputChange}
               />
             </div>
             <div className="mb-4">
@@ -50,13 +106,15 @@ const CheckoutPage = () => {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="city"
                 type="text"
+                value={formData.city}
+                onChange={handleInputChange}
               />
             </div>
             <button
               className="bg-[#A10058] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-[#242424]"
-              type="button"
+              type="submit"
             >
-              Continuar al Pago
+              Checkout
             </button>
           </form>
         </div>
@@ -81,7 +139,7 @@ const CheckoutPage = () => {
           <div className="mt-6 border-t pt-4">
             <h3 className="text-xl font-bold">Total: ${cartItems.reduce((total, item) => total + item.price * item.quantity, 0)}</h3>
           </div>
-        </div>
+        </div>
       </div>
     </section>
   );
