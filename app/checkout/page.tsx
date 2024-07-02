@@ -24,11 +24,10 @@ const CheckoutPage = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          formData,
-          cartItems
-        }),
+        body: JSON.stringify(formData),
       });
+      
+      console.log('datos: ', formData)
 
       if (response.ok) {
         const result = await response.json();

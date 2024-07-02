@@ -13,7 +13,7 @@ export default function LoginPage() {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3001/api/signin', {
+      const response = await fetch('http://localhost:3001/api/auth/signin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
