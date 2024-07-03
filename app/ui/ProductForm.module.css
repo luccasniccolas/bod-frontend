@@ -1,0 +1,41 @@
+/* components/ProductForm.module.css */
+
+.productForm {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .productForm label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .productForm input,
+  .productForm textarea,
+  .productForm select {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    margin-top: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .productForm button {
+    background-color: #5c5c5c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .productForm button:hover {
+    background-color: #0056b3;
+  }
+  

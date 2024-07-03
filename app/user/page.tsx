@@ -20,7 +20,7 @@ const Profile: React.FC = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/profile', {
+        const response = await fetch('http://localhost:3001/api/auth/profile', {
           method: 'GET',
           credentials: 'include', // Para enviar cookies con la solicitud
         });
