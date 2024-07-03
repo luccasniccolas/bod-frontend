@@ -10,7 +10,6 @@ export default function Home() {
   const [filteredData, setFilteredData] = useState([]);
   const router = useRouter();
   
-
   useEffect(() => {
     const threeScript = document.createElement("script");
     threeScript.src = "/three.min.js";
@@ -39,10 +38,15 @@ export default function Home() {
         });
       }
     });
+
+    return () => {
+      if (window.VANTA) {
+        window.VANTA.current && window.VANTA.current.destroy();
+      }
+    };
   }, []);
 
   useEffect(() => {
-
     fetch("http://localhost:3001/api/productos/get")
       .then((response) => response.json())
       .then((data) => {
@@ -50,21 +54,16 @@ export default function Home() {
         setFilteredData(data);
       });
   }, []);
-  console.log(data)
 
   useEffect(() => {
     let filtered = data;
-  
-    console.log('Initial data:', data);
-    console.log('Selected category:', selectedCategory);
-    console.log('Search term:', searchTerm);
-  
+
     if (searchTerm) {
       filtered = filtered.filter((product) =>
         product.nombre.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
-  
+
     if (selectedCategory) {
       const categoryMap = {
         'poleras': 2,
@@ -78,11 +77,10 @@ export default function Home() {
         filtered = filtered.filter((product) => Number(product.categoriaid) === categoryId);
       }
     }
-  
-    console.log('Filtered data:', filtered);
+
     setFilteredData(filtered);
   }, [searchTerm, selectedCategory, data]);
-  
+
   const handleProductClick = (productoid) => {
     router.push(`/productoss/${productoid}`);
   };
@@ -97,32 +95,34 @@ export default function Home() {
             className="w-full h-128 object-cover"
           />
         </div>
-        <div ref={vantaRef} style={{ width: "100%", height: "100vh" }}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-auto max-w-7xl">
-            {filteredData.map((product) => (
-              <div
-                key={product.productoid}
-                className="mt-16 mx-3 bg-[#b4b4b4] rounded-lg shadow-md p-8 relative"
-              >
-                <div className="h-64 flex items-center justify-center relative">
-                  <img
-                    src={`${product.primera_url}`}
-                    alt={product.nombre}
-                    className="object-contain h-full"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center hover:bg-opacity-50 transition-opacity duration-300">
-                    <span
-                      className="text-white font-bold text-2xl opacity-0 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
-                      onClick={() => handleProductClick(product.productoid)}
-                    >
-                      Ver detalles
-                    </span>
+        <div ref={vantaRef} style={{ width: "100%", height: "100%" }}>
+          <div className="flex items-center justify-center min-h-screen">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-auto max-w-7xl p-4">
+              {filteredData.map((product) => (
+                <div
+                  key={product.productoid}
+                  className="mt-16 mx-3 bg-[#b4b4b4] rounded-lg shadow-md p-8 relative"
+                >
+                  <div className="h-64 flex items-center justify-center relative">
+                    <img
+                      src={`${product.primera_url}`}
+                      alt={product.nombre}
+                      className="object-contain h-full"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center hover:bg-opacity-50 transition-opacity duration-300">
+                      <span
+                        className="text-white font-bold text-2xl opacity-0 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                        onClick={() => handleProductClick(product.productoid)}
+                      >
+                        Ver detalles
+                      </span>
+                    </div>
                   </div>
+                  <h2 className="text-xl font-bold mb-2">{product.nombre}</h2>
+                  <p className="text-gray-700">${product.precio}</p>
                 </div>
-                <h2 className="text-xl font-bold mb-2">{product.nombre}</h2>
-                <p className="text-gray-700">${product.precio}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { Montserrat } from "next/font/google";
 import "./ui/globals.css";
 import ClientRootLayout from "./ClientRootLayout";
+import Footer from "./ui/Footer";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -13,7 +14,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={montserrat.className}>
-        <ClientRootLayout>{children}</ClientRootLayout>
+        <ClientRootLayout>{
+        children
+        }
+        </ClientRootLayout>
+
       </body>
     </html>
   );
